@@ -9,13 +9,12 @@ function REST_ROUTER(router,connection,md5) {
 //
 REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
     router.get("/",function(req,res){
-        var productQuery = "SELECT * FROM ?? WHERE ??=?";
+        var query = "SELECT * FROM ?? WHERE ??= ?";
         var table = ["products","FSN",req.query.fsn];
-        var productQuery = mysql.format(productQuery,table);
+        query = mysql.format(query,table);
         var productDetailTry = {};
-        connection.query(productQuery,function(err,rows){
+        connection.query(query,function(err,rows){
             productDetailTry = rows;
-            console.log(JSON.stringify(rows));
         });
 
         var query = "SELECT * FROM ?? WHERE ??=?";
@@ -54,8 +53,6 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
                 }
 
                 productDetailTry['try'] = tryCount;
-
-                console.log(JSON.stringify(productDetailTry));
             }
         });
     })

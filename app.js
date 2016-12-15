@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql      = require('mysql');
-var rest = require("./REST.js");
+var rest = require("./REST2.js");
 var md5 = require('MD5');
 
 //var index = require('./routes/index');
@@ -43,6 +43,7 @@ REST.prototype.configureExpress = function(connection) {
   app.use(bodyParser.json());
   var router = express.Router();
   app.use('/api', router);
+  app.use('/discount-history', router);
   var rest_router = new rest(router,connection,md5);
   self.startServer();
 }
