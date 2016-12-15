@@ -1,33 +1,33 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
-2 info using npm@3.7.3
-3 info using node@v5.8.0
+2 info using npm@3.6.0
+3 info using node@v5.7.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle big-bang-theory@0.0.0~prestart: big-bang-theory@0.0.0
 6 silly lifecycle big-bang-theory@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle big-bang-theory@0.0.0~start: big-bang-theory@0.0.0
 8 verbose lifecycle big-bang-theory@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle big-bang-theory@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/godfrey.f/code/big-bang/big-bang-theory/BBT/node_modules/.bin:/usr/local/bin:/Users/godfrey.f/godfern/google-cloud-sdk/bin:/Users/godfrey.f/.bin:/Users/godfrey.f/.bin:/Users/godfrey.f/.bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/godfrey.f/dev/phabricator/arcanist/bin:/Users/godfrey.f/.rvm/bin:/usr/local/mysql/bin
-10 verbose lifecycle big-bang-theory@0.0.0~start: CWD: /Users/godfrey.f/code/big-bang/big-bang-theory/BBT
+9 verbose lifecycle big-bang-theory@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/gandharva.rb/dev/BBT/node_modules/.bin:/Users/gandharva.rb/.rvm/gems/ruby-2.3.0/bin:/Users/gandharva.rb/.rvm/gems/ruby-2.3.0@global/bin:/Users/gandharva.rb/.rvm/rubies/ruby-2.3.0/bin:/Users/gandharva.rb/.bin:/Users/gandharva.rb/.bin:/Users/gandharva.rb/.bin:/Users/gandharva.rb/.bin:/Users/gandharva.rb/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/gandharva.rb/.rvm/bin
+10 verbose lifecycle big-bang-theory@0.0.0~start: CWD: /Users/gandharva.rb/dev/BBT
 11 silly lifecycle big-bang-theory@0.0.0~start: Args: [ '-c', 'node app.js' ]
 12 silly lifecycle big-bang-theory@0.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle big-bang-theory@0.0.0~start: Failed to exec start script
 14 verbose stack Error: big-bang-theory@0.0.0 start: `node app.js`
 14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:239:16)
+14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:232:16)
 14 verbose stack     at emitTwo (events.js:100:13)
 14 verbose stack     at EventEmitter.emit (events.js:185:7)
 14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
 14 verbose stack     at emitTwo (events.js:100:13)
 14 verbose stack     at ChildProcess.emit (events.js:185:7)
-14 verbose stack     at maybeClose (internal/child_process.js:850:16)
-14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+14 verbose stack     at maybeClose (internal/child_process.js:827:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 15 verbose pkgid big-bang-theory@0.0.0
-16 verbose cwd /Users/godfrey.f/code/big-bang/big-bang-theory/BBT
-17 error Darwin 15.0.0
+16 verbose cwd /Users/gandharva.rb/dev/BBT
+17 error Darwin 16.0.0
 18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
-19 error node v5.8.0
-20 error npm  v3.7.3
+19 error node v5.7.0
+20 error npm  v3.6.0
 21 error code ELIFECYCLE
 22 error big-bang-theory@0.0.0 start: `node app.js`
 22 error Exit status 1

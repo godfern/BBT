@@ -46,7 +46,7 @@ router.post('/product/bargain', function (req, res) {
 
         res.json({
             bargain_status: bargain_status,
-            selling_price
+            selling_price: selling_price
         });
     });
 
