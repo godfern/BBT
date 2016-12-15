@@ -4,11 +4,44 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mysql      = require('mysql');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+var connection = mysql.createConnection({
+  host     : '127.0.0.1',
+  user     : 'root',
+  password : 'test123',
+  database : 'big_bang'
+});
+
+connection.connect(function(err){
+  if(err){
+    console.log('Error connecting to Db');
+    return;
+  }
+  console.log('Connection established');
+});
+
+//connection.end(function(err) {
+//  // The connection is terminated gracefully
+//  // Ensures all previously enqueued queries are still
+//  // before sending a COM_QUIT packet to the MySQL server.
+//});
+
+
+connection.query('SELECT * FROM discounts',function(err,rows){
+  if(err) throw err;
+
+  console.log('Data received from Db:\n');
+  console.log(rows);
+});
+
+connection.end();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
