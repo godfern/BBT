@@ -12,10 +12,10 @@ var users = require('./routes/users');
 var app = express();
 
 var connection = mysql.createConnection({
-  host     : '127.0.0.1',
+  host     : 'srm-db1.stage.ch.flipkart.com',
   user     : 'root',
-  password : 'test123',
-  database : 'big_bang'
+  password : '',
+  database : 'bbt'
 });
 
 connection.connect(function(err){
@@ -33,7 +33,7 @@ connection.connect(function(err){
 //});
 
 
-connection.query('SELECT * FROM discounts',function(err,rows){
+connection.query('SELECT * FROM products',function(err,rows){
   if(err) throw err;
 
   console.log('Data received from Db:\n');
