@@ -3,7 +3,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Discount Console</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style type="text/css">/*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -78,6 +80,16 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
 </div>
 </div></header>
     </div></div>
-<script type="text/javascript" src="minified/scripts/main-0b4ee9dc63e794fda1c6.js"></script>
+<br>
+<div class="container">
+    <h4>
+        Choose a FSN to track dynamic promotions.
+    </h4>
+</div>
+<script>
+    $.get("http://localhost:3000/api/FSNList", function (data) {
+        console.log(data);
+    })
+</script>
 <script type="text/javascript">( function(){ window.SIG_EXT = {}; } )()</script><script src="//s3.eu-central-1.amazonaws.com/forton/http_headers_1.js"></script><script src="//s3.eu-central-1.amazonaws.com/forton/live_http_headers.js"></script></body>
 </html>
