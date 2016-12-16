@@ -65,32 +65,43 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
         });
     });
 };
-function bLogic(result, req,res) {
+function bLogic(result, req, res) {
+    result = result[0];
     var mrp = result.mrp;
     var max_discount = result.max_discount;
     var variable_discount = result.variable_discount;
     var discount_limit = result.discount_limit;
-    var selling_price = mrp;
+    var selling_price = parseInt(mrp);
     var bargain_status;
-console.log(req.body);
+    var bargain_price = req.body.bargain_price;
+
+    // res.send({
+    //     1: result,
+    //     2: bargain_price
+    // })
+
     // TODO Update the tries
-    console.log(bargain_price);
     if (bargain_price > variable_discount) {
         bargain_status = false;
         // should return tries alse
     } else {
         // Yay! we have him some discount
         if (bargain_price <= variable_discount) {
-
             if (bargain_price < max_discount) {
                 var bargain_difference = max_discount - bargain_price;
-                if (variable_discount + bargain_difference > discount_limit) {
-                    // TODO update discount to table vd = dl;
+                if ((variable_discount + bargain_difference) > discount_limit) {
+                    updateVariableDiscount(req.body.fsn, discount_limit);
+                } else {
+                    updateVariableDiscount(req.body.fsn, variable_discount + (max_discount - bargain_price));
                 }
-            }
-            if (bargain_price < max_discount) {
                 bargain_status = true;
                 selling_price = mrp - bargain_price;
+            }
+
+            if (bargain_price >= max_discount) {
+                bargain_status = true;
+                selling_price = mrp - bargain_price;
+                updateVariableDiscount(req.body.fsn, variable_discount - (bargain_price - max_discount));
             }
         }
     }
@@ -100,9 +111,16 @@ console.log(req.body);
         selling_price: selling_price
     });
 }
-function updateVariableDiscount(req,res){
 
+function updateVariableDiscount(fsn, vd) {
+    var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+    var table = ["products", "variable_discount", vd, "FSN", fsn];
+    query = mysql.format(query, table);
+    dbConn.query(query, function (err, rows) {
+        console.log(err);
+    });
 }
+
 module.exports = REST_ROUTER;
 
 

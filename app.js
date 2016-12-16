@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql      = require('mysql');
-var rest = require("./REST2.js");
+var rest = require("./REST.js");
 var md5 = require('MD5');
 
 //var index = require('./routes/index');
