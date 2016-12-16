@@ -128,14 +128,26 @@ function bLogic(result, req, res) {
             }
         }
     }
+    insertHistory(req,res,{});
 
     res.json({
         bargain_status: bargain_status,
         selling_price: selling_price
     });
 }
-function insertHistory() {
+function insertHistory(req, res, object) {
+    var fsn = object.fsn,
+        mrp = object.mrp,
+        set_discount = object.set_discount,
+        selling_price = object.selling_price,
+        variable_discount = object.variable_discount,
+        discount_limit = object.discount_limit;
+    var query = "INSERT INTO ??(??,??,??,??,??,??) VALUES (?,?,?,?,?,?)";
+    var table = ["discount_history", "fsn", "mrp", "set_discount", "selling_price", "variable_discount", "discount_limit", fsn, mrp, set_discount, selling_price, variable_discount, discount_limit];
+    query = mysql.format(query, table);
+    dbConn.query(query, function (err, rows) {
 
+    });
 }
 function updateVariableDiscount(fsn, vd) {
     var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
