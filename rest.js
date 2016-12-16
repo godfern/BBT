@@ -21,7 +21,7 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
                 res.json({"Error": true, "Message": err});
             } else {
                 _.each(rows, function (item, index) {
-                    rows[index].price_saved = item.set_discount - (item.mrp - item.selling_price);
+                    rows[index].price_saved = (item.mrp - item.selling_price) - item.set_discount;
                 });
                 //res.render('fsnHistory',{rows: rows});
                 res.send({rows: rows});
