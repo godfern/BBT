@@ -32,7 +32,7 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
                 console.log(err);
                 res.json({"Error": true, "Message": err});
             } else {
-                res.json(rows);
+                res.render('fsnList', rows);
             }
         });
     });
@@ -128,7 +128,6 @@ function bLogic(result, req, res) {
             }
         }
     }
-    insertHistory(req,res,{});
 
     res.json({
         bargain_status: bargain_status,
