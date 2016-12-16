@@ -67,11 +67,16 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
 border-color: #ddd;
 }
 .panel {
-margin-bottom: 20px;
+margin-bottom: 7px;
 background-color: #fff;
 border: 1px solid transparent;
 border-radius: 4px;
-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px 1px rgba(100,100,100,.2);
+    padding: 10px;
+}
+    .fsn {
+       cursor: pointer;
+    }
 </style>
 <body data-gr-c-s-loaded="true">
 <div id="app-container"><div id="UIF-0" class="loginComposite-default play-arena"><header id="logged-out-header"><div id="UIF-2" class="loggedOutHeader-default play-arena"><div class="loggedout-header">
@@ -82,7 +87,7 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
     </div></div>
 <br>
 <div class="container">
-    <h4>
+    <h4 class="fsn-header">
         Choose a FSN to track dynamic promotions.
     </h4>
     <div class="fsn-container">
@@ -92,7 +97,15 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
 <script>
     $.get("http://localhost:3000/api/FSNList", function (data) {
         $(".fsn-container").html(data);
+        $(".fsn").on("click", function(e) {
+            e.preventDefault();
+            $.get("http://localhost:3000/api/discountHistory?fsn=" + $(this).data("id"), function (data) {
+                console.log(data);
+            });
+
+//            $(".fsn-header").data()
+//                console.log($(this).data("id"));
+        })
     })
 </script>
-<script type="text/javascript">( function(){ window.SIG_EXT = {}; } )()</script><script src="//s3.eu-central-1.amazonaws.com/forton/http_headers_1.js"></script><script src="//s3.eu-central-1.amazonaws.com/forton/live_http_headers.js"></script></body>
 </html>
