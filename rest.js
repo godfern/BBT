@@ -10,9 +10,6 @@ function REST_ROUTER(router, connection, md5) {
 }
 //
 REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
-    router.get("/", function (req, res) {
-
-    });
     router.post('/bargain/', function (req, res) {
         var productQuery = "SELECT * FROM ?? WHERE ??=?";
         var table = ["products", "FSN", 'SHOEG2Y9D6Q7FGFU1'];

@@ -41,6 +41,7 @@ REST.prototype.configureExpress = function(connection) {
   var self = this;
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.use(express.static(path.join(__dirname, 'public')));
   var router = express.Router();
   app.use('/api', router);
   app.use('/discount-history', router);
@@ -139,7 +140,6 @@ new REST();
 //app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, 'public')));
 //
 //app.use('/', index);
 //app.use('/users', users);
