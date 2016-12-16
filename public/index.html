@@ -88,24 +88,39 @@ border-radius: 4px;
 <br>
 <div class="container">
     <h4 class="fsn-header">
-        Choose a FSN to track dynamic promotions.
+
     </h4>
     <div class="fsn-container">
 
     </div>
 </div>
 <script>
-    $.get("http://localhost:3000/api/FSNList", function (data) {
-        $(".fsn-container").html(data);
-        $(".fsn").on("click", function(e) {
-            e.preventDefault();
-            $.get("http://localhost:3000/api/discountHistory?fsn=" + $(this).data("id"), function (data) {
-                console.log(data);
-            });
+    function showFsnList() {
+        $(".fsn-header").html("Choose a FSN to track dynamic promotions.");
+        $.get("http://localhost:3000/api/FSNList", function (data) {
+            $(".fsn-container").html(data);
+            $(".fsn").on("click", function(e) {
+                e.preventDefault();
+                var fsn = $(this).data("id");
+                $.get("http://localhost:3000/api/discountHistory?fsn=" + fsn, function (data) {
+                    $(".fsn-header").html("<a href='#' class='goBack'>..back </a><h4> "+ fsn +"</h4><div class='panel panel-default'><div class='row'>" +
+                            "<div class='col-md-2'>MRP</div>" +
+                            "<div class='col-md-2'>Selling Price</div>" +
+                            "<div class='col-md-2'>Set discount</div>" +
+                            "<div class='col-md-2'>Variable Discount</div>" +
+                            "<div class='col-md-2'>Discount Limit</div>" +
+                            "<div class='col-md-2'>Amount Saved</div>" +
+                            "</div></div>");
 
-//            $(".fsn-header").data()
-//                console.log($(this).data("id"));
-        })
-    })
+                    $(".fsn-container").html(data);
+                    $(".goBack").on("click", function(e) {
+                        e.preventDefault();
+                        showFsnList();
+                    })
+                });
+            });
+        });
+    }
+    showFsnList();
 </script>
 </html>
