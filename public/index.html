@@ -85,10 +85,13 @@ box-shadow: 0 1px 1px rgba(0,0,0,.05);
     <h4>
         Choose a FSN to track dynamic promotions.
     </h4>
+    <div class="fsn-container">
+
+    </div>
 </div>
 <script>
     $.get("http://localhost:3000/api/FSNList", function (data) {
-        console.log(data);
+        $(".fsn-container").html(data);
     })
 </script>
 <script type="text/javascript">( function(){ window.SIG_EXT = {}; } )()</script><script src="//s3.eu-central-1.amazonaws.com/forton/http_headers_1.js"></script><script src="//s3.eu-central-1.amazonaws.com/forton/live_http_headers.js"></script></body>
