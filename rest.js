@@ -36,9 +36,22 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
             }
         });
     });
+    router.post("/checkout", function (req, res) {
+        var query = "SELECT * FROM ??";
+        var table = ["products"];
+        query = mysql.format(query, table);
+        dbConn.query(query, function (err, rows) {
+            if (err) {
+                console.log(err);
+                res.json({"Error": true, "Message": err});
+            } else {
+                res.render('fsnList', {rows: rows});
+            }
+        });
+    });
     router.post('/bargain/', function (req, res) {
         var productQuery = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["products", "FSN", 'SHOEG2Y9D6Q7FGFU1'];
+        var table = ["products", "FSN", req.body.fsn];
         productQuery = mysql.format(productQuery, table);
         var productDetailTry = {};
         connection.query(productQuery, function (err, rows) {
@@ -77,6 +90,7 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
                                 res.json({"Error": true, "Message": "Error executing MySQL query"});
                             } else {
                                 productDetailTry['try'] = tryCount;
+                                console.log({x:productDetailTry});
                                 bLogic(productDetailTry, req, res);
                             }
                         });
@@ -89,6 +103,7 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
     });
 };
 function bLogic(result, req, res) {
+    var tempResult = result;
     result = result[0];
     var mrp = result.mrp;
     var max_discount = result.max_discount;
@@ -97,11 +112,6 @@ function bLogic(result, req, res) {
     var selling_price = parseInt(mrp);
     var bargain_status;
     var bargain_price = req.body.bargain_price;
-
-    // res.send({
-    //     1: result,
-    //     2: bargain_price
-    // })
 
     // TODO Update the tries
     if (bargain_price > variable_discount) {
@@ -131,9 +141,14 @@ function bLogic(result, req, res) {
 
     res.json({
         bargain_status: bargain_status,
-        selling_price: selling_price
+        selling_price: selling_price,
+        result: tempResult,
+        attempts: tempResult["try"]
     });
 }
+
+
+
 function insertHistory(req, res, object) {
     var fsn = object.fsn,
         mrp = object.mrp,
