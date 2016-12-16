@@ -6,12 +6,35 @@ var dbConn;
 function REST_ROUTER(router, connection, md5) {
     var self = this;
     self.handleRoutes(router, connection, md5);
-    dbConn= connection;
+    dbConn = connection;
 }
 //
 REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
-    router.get("/", function (req, res) {
-
+    router.get("/discountHistory", function (req, res) {
+        var query = "SELECT * FROM ?? WHERE ??= ?";
+        var table = ["discount_history", "FSN", req.query.fsn];
+        query = mysql.format(query, table);
+        dbConn.query(query, function (err, rows) {
+            if (err) {
+                console.log(err);
+                res.json({"Error": true, "Message": err});
+            } else {
+                res.json(rows);
+            }
+        });
+    });
+    router.get("/FSNList", function (req, res) {
+        var query = "SELECT * FROM ??";
+        var table = ["products"];
+        query = mysql.format(query, table);
+        dbConn.query(query, function (err, rows) {
+            if (err) {
+                console.log(err);
+                res.json({"Error": true, "Message": err});
+            } else {
+                res.json(rows);
+            }
+        });
     });
     router.post('/bargain/', function (req, res) {
         var productQuery = "SELECT * FROM ?? WHERE ??=?";
@@ -39,7 +62,7 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
                                 res.json({"Error": true, "Message": "Error executing MySQL query"});
                             } else {
                                 productDetailTry['try'] = tryCount;
-                                bLogic(productDetailTry,req,res);
+                                bLogic(productDetailTry, req, res);
                             }
                         });
                     }
@@ -54,7 +77,7 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
                                 res.json({"Error": true, "Message": "Error executing MySQL query"});
                             } else {
                                 productDetailTry['try'] = tryCount;
-                                bLogic(productDetailTry,req,res);
+                                bLogic(productDetailTry, req, res);
                             }
                         });
                     }
@@ -111,7 +134,9 @@ function bLogic(result, req, res) {
         selling_price: selling_price
     });
 }
+function insertHistory() {
 
+}
 function updateVariableDiscount(fsn, vd) {
     var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
     var table = ["products", "variable_discount", vd, "FSN", fsn];
