@@ -19,7 +19,7 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
                 console.log(err);
                 res.json({"Error": true, "Message": err});
             } else {
-                res.json(rows);
+                res.render('fsnHistory',{rows: rows});
             }
         });
     });
