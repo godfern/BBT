@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "body-parser": "^1.15.2",
-    "mysql": "^2.12.0"
+    "mysql": "^2.12.0",
+    "nodemon": "^1.11.0"
   }
 }
