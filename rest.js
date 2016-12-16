@@ -2,6 +2,7 @@
  * Created by godfrey.f on 16/12/16.
  */
 var mysql = require("mysql");
+var _ = require('lodash');
 var dbConn;
 function REST_ROUTER(router, connection, md5) {
     var self = this;
@@ -19,7 +20,11 @@ REST_ROUTER.prototype.handleRoutes = function (router, connection, md5) {
                 console.log(err);
                 res.json({"Error": true, "Message": err});
             } else {
-                res.render('fsnHistory',{rows: rows});
+                _.each(rows, function (item, index) {
+                    rows[index].price_saved = (item.mrp - item.selling_price) - item.set_discount;
+                });
+                //res.render('fsnHistory',{rows: rows});
+                res.send({rows: rows});
             }
         });
     });
